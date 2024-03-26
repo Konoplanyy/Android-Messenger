@@ -7,4 +7,11 @@
     <string name="password">Password</string>
     <string name="Phone_or_ID">Phone or ID</string>
     <string name="Forget_Password">Forget Password</string>
+    <string name="Sign_Up">Sign Up</string>
+    <string name="Confirm_Password">Conform password</string>
+    <string name="passwords_do_not_match">passwords do not match</string>
+    <string name="error_try_leter">error try leter</string>
+    <string name="Incorrect_phone_number_entered">Incorrect phone number entered</string>
+    <string name="short_password">password must be at least 6 characters long</string>
+    <string name="eror_pass_ID">Incorect password or ID</string>
 </resources>
