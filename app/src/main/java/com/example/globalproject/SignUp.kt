@@ -3,7 +3,6 @@ package com.example.globalproject
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -54,7 +53,7 @@ class SignUp : AppCompatActivity() {
                     .add(user)
                     .addOnSuccessListener { documentReference ->
                         sp.putString("ID", ID.text.toString()).commit()
-                        startActivity(Intent(this, ChatList::class.java))
+                        startActivity(Intent(this, MessengerActivity::class.java))
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, getString(R.string.error_try_leter), Toast.LENGTH_LONG).show()
