@@ -16,6 +16,7 @@ import com.google.firebase.firestore.firestore
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.MainColor));
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)

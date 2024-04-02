@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.MainColor));
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)

@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class LoadingScreane : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.MainColor));
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_loading_screane)

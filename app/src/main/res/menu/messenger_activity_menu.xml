@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<menu xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
+<!--    <item-->
+<!--        android:id="@+id/chat_menu"-->
+<!--        android:title="Chat"-->
+<!--        android:icon="@drawable/chat_selector"-->
+<!--        app:actionId="@+id/action_chatFragment_to_contactsFragment4"/>-->
+<!--    <item-->
+<!--        android:id="@+id/contacts_menu"-->
+<!--        android:title="Contacts"-->
+<!--        android:icon="@drawable/contacts_selector"-->
+<!--        app:actionId="@+id/action_contactsFragment_to_settingsFragment3"/>-->
+<!--    <item-->
+<!--        android:id="@+id/settings_menu"-->
+<!--        android:title="Settings"-->
+<!--        android:icon="@drawable/settings_selector"-->
+<!--        app:actionId="@+id/action_chatFragment_to_settingsFragment"/>-->
+<!--</menu>-->
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Chat"
+    <item android:title="@string/chat"
         android:icon="@drawable/chat_selector"
         android:id="@+id/chat_menu"/>
-    <item android:title="Contacts"
+    <item android:title="@string/contacts"
         android:icon="@drawable/contacts_selector"
         android:id="@+id/contacts_menu"/>
-    <item android:title="Settings"
+    <item android:title="@string/settings"
         android:icon="@drawable/settings_selector"
         android:id="@+id/settings_menu"/>
 </menu>

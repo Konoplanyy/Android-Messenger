@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="MainColor">#1C1D1E</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Primary">#65696C</color>
     <color name="OnPrimary">#1397FB</color>
+    <color name="status_bar_color">#FF0000</color>
+    <color name="textPrimary">#F2F2F3</color>
+    <color name="textSecondary">#CACCCE</color>
+    <color name="surfaceDeep">#0F0F10</color>
+
 </resources>
