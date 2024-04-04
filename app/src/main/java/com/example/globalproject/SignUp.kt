@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import java.security.MessageDigest
 
 class SignUp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +46,10 @@ class SignUp : AppCompatActivity() {
             }else{
                 val db = Firebase.firestore
 
+
                 val user = hashMapOf(
                     "ID" to ID.text.toString(),
-                    "password" to password.text.toString()
+                    "password" to password.text.toString().hashCode().toString()
                 )
 
                 db.collection("users")

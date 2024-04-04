@@ -23,4 +23,5 @@
     <string name="chat">Chat</string>
     <string name="account_caps">ACCOUNT</string>
     <string name="options_caps">OPTIONS</string>
+    <string name="TypeHere">Type Here ...</string>
 </resources>
