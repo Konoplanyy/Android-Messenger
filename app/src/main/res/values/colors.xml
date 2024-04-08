@@ -8,5 +8,6 @@
     <color name="textPrimary">#F2F2F3</color>
     <color name="textSecondary">#CACCCE</color>
     <color name="surfaceDeep">#0F0F10</color>
+    <color name="Warning">#F5BA3B</color>
 
 </resources>

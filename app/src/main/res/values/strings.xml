@@ -24,4 +24,14 @@
     <string name="account_caps">ACCOUNT</string>
     <string name="options_caps">OPTIONS</string>
     <string name="TypeHere">Type Here ...</string>
+    <string name="Changing_app_theme_color_to_dark">Changing app theme color to dark</string>
+    <string name="Dark_Mode">Dark Mode</string>
+    <string name="Logout">Logout</string>
+    <string name="Sign_out_of_your_account_on_this_device">Sign out of your account on this device</string>
+    <string name="cancel">Cancel</string>
+    <string name="Save">Save</string>
+    <string name="New_Contact">New Contact</string>
+    <string name="Name">Name</string>
+    <string name="Surname">Surname</string>
+    <string name="Number">Number</string>
 </resources>

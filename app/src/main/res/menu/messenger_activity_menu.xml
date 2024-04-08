@@ -21,11 +21,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/chat"
         android:icon="@drawable/chat_selector"
-        android:id="@+id/chat_menu"/>
+        android:id="@+id/action_chat_menu"/>
     <item android:title="@string/contacts"
         android:icon="@drawable/contacts_selector"
-        android:id="@+id/contacts_menu"/>
+        android:id="@+id/action_contacts_menu"/>
     <item android:title="@string/settings"
         android:icon="@drawable/settings_selector"
-        android:id="@+id/settings_menu"/>
+        android:id="@+id/action_settings_menu"/>
 </menu>

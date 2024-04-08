@@ -25,11 +25,12 @@ class LoadingScreane : AppCompatActivity() {
         if (sp.getString("TY", "-9") != "-9")
         {
             startActivity(Intent(this, MessengerActivity::class.java))
+            finish()
         }
         else{
             startActivity(Intent(this, Login::class.java))
+            finish()
         }
-
     }
 
 

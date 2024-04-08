@@ -42,6 +42,7 @@ class Login : AppCompatActivity() {
                                 df = true
                                 sp.putString("ID", ID.text.toString()).commit()
                                 startActivity(Intent(this, MessengerActivity::class.java))
+                                finish()
                             }
                         }
                     }
@@ -56,9 +57,6 @@ class Login : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-
-    }
 
     fun onSingUpClick(view: View) {
         startActivity(Intent(this, SignUp::class.java))

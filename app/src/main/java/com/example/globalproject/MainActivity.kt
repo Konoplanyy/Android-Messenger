@@ -85,10 +85,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", "onDestroy()")
     }
 
-    override fun onBackPressed() {
-
-    }
-
     fun Add(view: View)
     {
         val Login = Intent(this, Login::class.java)

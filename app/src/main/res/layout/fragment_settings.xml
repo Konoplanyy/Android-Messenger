@@ -89,6 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -105,7 +106,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dark Mode"
+                android:text="@string/Dark_Mode"
                 android:textColor="@color/textPrimary"
                 android:textSize="16sp" />
 
@@ -113,15 +114,47 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Changing app theme color to dark"
+                android:text="@string/Changing_app_theme_color_to_dark"
                 android:textColor="@color/textSecondary" />
         </LinearLayout>
 
         <Switch
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:checked="true" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="Logout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Logout"
+            android:textColor="@color/Warning"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/Sign_out_of_your_account_on_this_device"
+                android:textColor="@color/Warning" />
+        </LinearLayout>
     </LinearLayout>
 
 
