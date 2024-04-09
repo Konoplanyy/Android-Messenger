@@ -41,6 +41,7 @@ class Login : AppCompatActivity() {
                             if (document.getLong("password") == password.text.toString().hashCode().toLong()){
                                 df = true
                                 sp.putString("ID", ID.text.toString()).commit()
+                                sp.putString("user", "5AOOAj9XnH2eZ0UgN7XY").commit()
                                 startActivity(Intent(this, MessengerActivity::class.java))
                                 finish()
                             }
