@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.FrameStats
 import android.view.LayoutInflater
@@ -34,11 +35,6 @@ class MessengerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messenger_activity)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
 
 
 
@@ -52,10 +48,7 @@ class MessengerActivity : AppCompatActivity() {
         }
 
         var sp = getSharedPreferences("PC", MODE_PRIVATE)
-//        val settingsFragment = supportFragmentManager.findFragmentById(R.id.) as SettingsFragment
         sp.edit().putString("TY", "9").commit()
-//        var emailname: TextView = findViewById(R.id.textView11) as SettingsFragment
-//        emailname.text = sp.getString("ID", "Don`t load")
 
         val fragmentManager: FragmentManager = supportFragmentManager
 
@@ -73,38 +66,13 @@ class MessengerActivity : AppCompatActivity() {
                 true
         }
 
-//        val bottomSheetFragment = Contacts_Add_BS()
-//        bottomSheetFragment.setDataListener(this)
-//        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
-
-        if (fragment != null) {
-            val recyclerView = fragment.view?.findViewById<RecyclerView>(R.id.recyclerView)
-
-            recyclerView?.apply {
-                val dataList = listOf(
-                    YourData("Sakane Miiko", "send your picture to me ! i want to use for your profile on web…", R.drawable.smile_btn_img),
-                    YourData("Second Name", "Second capital", R.drawable.smile_btn_img),
-                )
-
-                recyclerView.adapter = YourAdapter(dataList)
-
-            }
-        } else {
-
-        }
-
-
 
     }
 
-//    override fun onDataReceived(Contact: HashMap<String, String>) {
-//        val db = Firebase.firestore
-//        var sp = getSharedPreferences("PC", MODE_PRIVATE)
-//
-//        db.collection("users/" + sp.getString("user", "") +"/Contacts")
-//            .add(Contact)
-//    }
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return super.onCreateView(name, context, attrs)
+
+    }
 
     fun Logout(view: View) {
         var sp = getSharedPreferences("PC", Context.MODE_PRIVATE)
@@ -117,34 +85,6 @@ class MessengerActivity : AppCompatActivity() {
         modalBottomSheet.show(supportFragmentManager, Contacts_Add_BS.TAG)
     }
 
-
 }
 
-data class YourData(val name: String, val capital: String, val flagResource: Int)
 
-class YourAdapter(private val dataList: List<YourData>) : RecyclerView.Adapter<YourAdapter.ViewHolder>() {
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val flagImageView: ImageView = itemView.findViewById(R.id.flag)
-        val nameTextView: TextView = itemView.findViewById(R.id.name)
-        val capitalTextView: TextView = itemView.findViewById(R.id.capital)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.messeger_user_list, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = dataList[position]
-
-        // Встановлюємо дані для кожного елемента списку
-        holder.flagImageView.setImageResource(item.flagResource)
-        holder.nameTextView.text = item.name
-        holder.capitalTextView.text = item.capital
-    }
-
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
-}

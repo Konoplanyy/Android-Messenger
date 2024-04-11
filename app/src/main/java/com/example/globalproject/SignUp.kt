@@ -29,6 +29,7 @@ class SignUp : AppCompatActivity() {
         var sp = getSharedPreferences("PC", Context.MODE_PRIVATE).edit()
         var ID: TextView = findViewById(R.id.PhoneIdInput)
         var password: TextView = findViewById(R.id.PasswordInput)
+        var name: TextView = findViewById(R.id.NameInput)
         var ConfirmPassword: TextView = findViewById(R.id.PasswordConfirmInput)
         var button: Button = findViewById(R.id.LoginButton)
         button.setOnClickListener {
@@ -49,22 +50,23 @@ class SignUp : AppCompatActivity() {
 
                 val user = hashMapOf(
                     "ID" to ID.text.toString(),
-                    "password" to password.text.toString().hashCode().toString()
+                    "password" to password.text.toString().hashCode().toString(),
+                    "Name" to name.text.toString()
                 )
 
                 db.collection("users")
                     .add(user)
                     .addOnSuccessListener { documentReference ->
-                        sp.putString("ID", ID.text.toString()).commit()
-                        startActivity(Intent(this, MessengerActivity::class.java))
+//                        sp.putString("ID", ID.text.toString()).commit()
+//                        sp.putString("user", document.id.toString()).commit()
+                        startActivity(Intent(this, Login::class.java))
+                        finish()
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, getString(R.string.error_try_leter), Toast.LENGTH_LONG).show()
                     }
             }
         }
-
-        finish()
 
     }
 }

@@ -1,10 +1,25 @@
 package com.example.globalproject
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.get
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
+import java.util.Timer
+import java.util.TimerTask
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +48,47 @@ class ContactsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contacts, container, false)
+        val view = inflater.inflate(R.layout.fragment_contacts, container, false)
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.Contacts_recyclerView)
+
+        var db = Firebase.firestore
+        var sp = requireActivity().getSharedPreferences("PC", Context.MODE_PRIVATE)
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+
+
+        val dataList = mutableListOf<YourData>()
+
+        db.collection("users/${sp.getString("user", "")}/Contacts").get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val thirdData = YourData(
+                        "${document.getString("Name")} ${document.getString("Surname")}",
+                        document.getString("Phone").toString(),
+                        R.drawable.smile_btn_img
+                    )
+                    dataList.add(thirdData)
+                }
+
+                val itemClickListener = object : ItemClickListener {
+                    override fun onItemClick(position: Int, text:String, phone:String) {
+                        val pos = recyclerView.get(position)
+                        Toast.makeText(context, "Position $pos", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                recyclerView?.adapter = YourAdapter(dataList, itemClickListener)
+            }
+
+
+
+
+        return view
+    }
+
+    fun updateData() {
+        // Виконайте код для оновлення даних тут
+        println("Оновлення даних...")
     }
 
     companion object {

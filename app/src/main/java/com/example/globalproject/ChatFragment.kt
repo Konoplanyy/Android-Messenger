@@ -1,11 +1,19 @@
 package com.example.globalproject
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.get
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,8 +44,42 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+        val view = inflater.inflate(R.layout.fragment_chat, container, false)
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+
+        var db = Firebase.firestore
+        var sp = requireActivity().getSharedPreferences("PC", Context.MODE_PRIVATE)
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+
+
+        val dataList = mutableListOf<YourData>()
+
+        db.collection("users/${sp.getString("user", "")}/Contacts").get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val thirdData = YourData(
+                        "${document.getString("Name")} ${document.getString("Surname")}",
+                        document.getString("Phone").toString(),
+                        R.drawable.smile_btn_img
+                    )
+                    dataList.add(thirdData)
+                }
+
+                val itemClickListener = object : ItemClickListener {
+                    override fun onItemClick(position: Int, text:String, phone:String) {
+                        var intent = Intent(requireContext(), Chat::class.java)
+                        intent.putExtra("Phone", phone)
+                        startActivity(intent)
+                    }
+                }
+
+
+                recyclerView?.adapter = YourAdapter(dataList, itemClickListener)
+            }
+
+
+        return view
     }
 
     companion object {

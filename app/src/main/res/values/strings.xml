@@ -34,4 +34,5 @@
     <string name="Name">Name</string>
     <string name="Surname">Surname</string>
     <string name="Number">Number</string>
+    <string name="Full_Name">Full Name</string>
 </resources>

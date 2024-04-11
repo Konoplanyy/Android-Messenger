@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,11 +20,6 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.*
 
 class Contacts_Add_BS : BottomSheetDialogFragment() {
-    private var dataListener: DataListener? = null
-
-    fun setDataListener(listener: DataListener){
-        dataListener = listener
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,18 +43,48 @@ class Contacts_Add_BS : BottomSheetDialogFragment() {
         }
 
         SaveBtn.setOnClickListener {
+//            val Contact = hashMapOf(
+//                "Name" to Name.text.toString(),
+//                "Surname" to Surname.text.toString(),
+//                "Phone" to Phone.text.toString()
+//            )
+//
+//
+//
+//            db.collection("users/" + sp.getString("user", "") + "/Contacts")
+//                .add(Contact)
+//
+//            dismiss()
             val db = Firebase.firestore
             var sp =  requireActivity().getSharedPreferences("PC", Context.MODE_PRIVATE)
-            val Contact = hashMapOf(
-                "Name" to Name.text.toString(),
-                "Surname" to Surname.text.toString(),
-                "Phone" to Phone.text.toString()
-            )
+            db.collection("users")
+                .whereEqualTo("ID", Phone.text.toString())
+                .get()
+                .addOnSuccessListener { documents ->
+                    if (!documents.isEmpty && Phone.text.toString() != sp.getString("ID", "")) {
+                        val Contact = hashMapOf(
+                            "Name" to Name.text.toString(),
+                            "Surname" to Surname.text.toString(),
+                            "Phone" to Phone.text.toString()
+                        )
 
-            db.collection("users/" + sp.getString("user", "") + "/Contacts")
-                .add(Contact)
-
-            dismiss()
+                        db.collection("users/${sp.getString("user", "")}/Contacts")
+                            .add(Contact)
+                            .addOnSuccessListener {
+                                // Успішно додано
+                                dismiss()
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w("TAG", "Error adding document", e)
+                                // Тут можна додати код для обробки помилки
+                            }
+                    } else {
+                        Toast.makeText(requireContext(), "Такого номера не існує", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.w("TAG", "Error getting documents", e)
+                }
         }
     }
     companion object {

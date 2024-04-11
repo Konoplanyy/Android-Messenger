@@ -1,10 +1,13 @@
 package com.example.globalproject
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,14 +30,26 @@ class SettingsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        val view = inflater.inflate(R.layout.fragment_settings, container, false)
+
+        var sp =  requireActivity().getSharedPreferences("PC", Context.MODE_PRIVATE)
+
+        val textphone = view?.findViewById<TextView>(R.id.textView11)
+        val textname = view?.findViewById<TextView>(R.id.textView10)
+
+        textphone?.text = sp.getString("ID", "Don`t load")
+        textname?.text = sp.getString("Name", "Don`t load")
+
+        return view
     }
 
     companion object {
@@ -56,4 +71,10 @@ class SettingsFragment : Fragment() {
                 }
             }
     }
+
+    fun updateTextView(text: String) {
+        val textView11 = view?.findViewById<TextView>(R.id.textView11)
+        textView11?.text = text
+    }
+
 }
