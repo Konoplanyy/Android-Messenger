@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class YourAdapter(private val dataList: List<YourData>, private val itemClickListener: ItemClickListener) : RecyclerView.Adapter<YourAdapter.ViewHolder>() {
+class ChatListAdapter(private val dataList: List<ChatListData>, private val itemClickListener: ItemClickListener) : RecyclerView.Adapter<ChatListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val flagImageView: ImageView = itemView.findViewById(R.id.flag)
@@ -46,7 +46,7 @@ class YourAdapter(private val dataList: List<YourData>, private val itemClickLis
     }
 }
 //Data Class
-data class YourData(val name: String, val capital: String, val flagResource: Int)
+data class ChatListData(val name: String, val capital: String, val flagResource: Int)
 
 
 //Interface
