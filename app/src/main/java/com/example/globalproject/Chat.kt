@@ -16,15 +16,21 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.database
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class Chat : AppCompatActivity() {
     val MAX_MESSAGE_LENGTH = 200
-    var messages = mutableListOf<String>()
+    var messages = mutableListOf<DataMessage>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -42,7 +48,15 @@ class Chat : AppCompatActivity() {
         val talker_name = intent.getStringExtra("Name")
         val user_phone = sp.getString("ID", "")
         val db = Firebase.database
-        val myRef = db.getReference(user_phone + "-" + talker_phone)
+        val path: String
+        if (user_phone.toString().compareTo(talker_phone.toString()) < 0){
+            path = user_phone.toString() + "-" + talker_phone.toString()
+        }
+        else{
+            path = talker_phone.toString() + "-" + user_phone.toString()
+
+        }
+        val myRef = db.getReference(path)
 
         val TextViewName:TextView = findViewById(R.id.textView7)
         TextViewName.text = talker_name
@@ -55,12 +69,24 @@ class Chat : AppCompatActivity() {
         val EditText : EditText = findViewById(R.id.PhoneIdInput)
         val SendButton : Button = findViewById(R.id.SendButton)
 
+        val chatAdapter = ChatAdapter(this)
+        val recyclerView = findViewById<RecyclerView>(R.id.Chat_recyclerView)
+        recyclerView.adapter = chatAdapter
+        recyclerView?.layoutManager = LinearLayoutManager(this)
+
+
         SendButton.setOnClickListener {
             val msg = EditText.text.toString()
             if (!msg.equals("")){
                 if (msg.length < MAX_MESSAGE_LENGTH){
+                    val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+                    val messageData = hashMapOf<String, String>(
+                        "message" to msg,
+                        "sender" to sp.getString("ID", "").toString(),
+                        "timestamp" to dateFormat.format(Date())
+                    )
                     myRef.push()
-                        .setValue(msg)
+                        .setValue(messageData)
 
                     EditText.setText("")
                 }
@@ -72,8 +98,21 @@ class Chat : AppCompatActivity() {
 
         myRef.addChildEventListener(object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val msg = snapshot.getValue(String::class.java).toString()
+                messages.clear()
+                val msgText = snapshot.child("message").getValue(String::class.java).toString()
+                val sender = snapshot.child("sender").getValue(String::class.java).toString()
+                val time = snapshot.child("timestamp").getValue(String::class.java).toString()
+                val msg = DataMessage(msgText, sender, time)
                 messages += msg
+
+                if (messages.isNotEmpty()) {
+                    for (message in messages) {
+                        if (message.sender == sp.getString("ID", ""))
+                            chatAdapter.addMessage(message.message.toString(), message.timestamp.toString(), 1)
+                        else
+                            chatAdapter.addMessage(message.message.toString(), message.timestamp.toString(), 2)
+                    }
+                }
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

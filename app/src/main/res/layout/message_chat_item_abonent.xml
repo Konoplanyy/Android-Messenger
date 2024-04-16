@@ -9,11 +9,11 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:gravity="right"
+        android:layout_marginEnd="70dp"
+        android:gravity="left"
         android:orientation="vertical"
         android:paddingTop="8dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,23 +22,23 @@
             android:id="@+id/messageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/message_background"
+            android:background="@drawable/message_background_abonent"
             android:padding="16dp"
             android:text="It only took a few minutes to create these"
             android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="right"
-            android:paddingTop="8dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:paddingTop="8dp">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView3"-->
-<!--                android:layout_width="12dp"-->
-<!--                android:layout_height="12dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                tools:srcCompat="@tools:sample/avatars" />-->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView3"-->
+            <!--                android:layout_width="12dp"-->
+            <!--                android:layout_height="12dp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                tools:srcCompat="@tools:sample/avatars" />-->
 
             <TextView
                 android:id="@+id/TimeText"

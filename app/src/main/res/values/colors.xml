@@ -9,5 +9,7 @@
     <color name="textSecondary">#CACCCE</color>
     <color name="surfaceDeep">#0F0F10</color>
     <color name="Warning">#F5BA3B</color>
+    <color name="SurfaceSecondary">#343637</color>
+    <color name="SurfaceBrand">#1397FB</color>
 
 </resources>
