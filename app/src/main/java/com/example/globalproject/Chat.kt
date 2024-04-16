@@ -58,15 +58,15 @@ class Chat : AppCompatActivity() {
         SendButton.setOnClickListener {
             val msg = EditText.text.toString()
             if (!msg.equals("")){
-                  if (msg.length < MAX_MESSAGE_LENGTH){
-                      myRef.push()
-                          .setValue(msg)
+                if (msg.length < MAX_MESSAGE_LENGTH){
+                    myRef.push()
+                        .setValue(msg)
 
-                      EditText.setText("")
-                  }
+                    EditText.setText("")
+                }
                 else{
-                      Toast.makeText(this, getString(R.string.Big_message), Toast.LENGTH_SHORT).show()
-                  }
+                    Toast.makeText(this, getString(R.string.Big_message), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
