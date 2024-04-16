@@ -35,4 +35,5 @@
     <string name="Surname">Surname</string>
     <string name="Number">Number</string>
     <string name="Full_Name">Full Name</string>
+    <string name="Big_message">Big massage max 200 symvols</string>
 </resources>

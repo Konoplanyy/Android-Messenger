@@ -69,6 +69,7 @@ class ChatFragment : Fragment() {
                 val itemClickListener = object : ItemClickListener {
                     override fun onItemClick(position: Int, text:String, phone:String) {
                         var intent = Intent(requireContext(), Chat::class.java)
+                        intent.putExtra("Name", text)
                         intent.putExtra("Phone", phone)
                         startActivity(intent)
                     }
