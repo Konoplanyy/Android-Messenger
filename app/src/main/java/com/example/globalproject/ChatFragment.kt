@@ -3,13 +3,10 @@ package com.example.globalproject
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
@@ -53,12 +50,12 @@ class ChatFragment : Fragment() {
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
 
-        val dataList = mutableListOf<YourData>()
+        val dataList = mutableListOf<ChatListData>()
 
         db.collection("users/${sp.getString("user", "")}/Contacts").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    val thirdData = YourData(
+                    val thirdData = ChatListData(
                         "${document.getString("Name")} ${document.getString("Surname")}",
                         document.getString("Phone").toString(),
                         R.drawable.smile_btn_img
@@ -76,7 +73,7 @@ class ChatFragment : Fragment() {
                 }
 
 
-                recyclerView?.adapter = YourAdapter(dataList, itemClickListener)
+                recyclerView?.adapter = ChatListAdapter(dataList, itemClickListener)
             }
 
 

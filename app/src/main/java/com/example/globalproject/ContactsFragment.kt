@@ -1,25 +1,17 @@
 package com.example.globalproject
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import java.util.Timer
-import java.util.TimerTask
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,12 +49,12 @@ class ContactsFragment : Fragment() {
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
 
-        val dataList = mutableListOf<YourData>()
+        val dataList = mutableListOf<ChatListData>()
 
         db.collection("users/${sp.getString("user", "")}/Contacts").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    val thirdData = YourData(
+                    val thirdData = ChatListData(
                         "${document.getString("Name")} ${document.getString("Surname")}",
                         document.getString("Phone").toString(),
                         R.drawable.smile_btn_img
@@ -77,7 +69,7 @@ class ContactsFragment : Fragment() {
                     }
                 }
 
-                recyclerView?.adapter = YourAdapter(dataList, itemClickListener)
+                recyclerView?.adapter = ChatListAdapter(dataList, itemClickListener)
             }
 
 
